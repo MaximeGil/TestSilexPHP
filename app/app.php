@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 $app = new Silex\Application();
 
 $app->get('/', function() {
-	return ('Hello World');
+	return new Response('Hello World');
 });
 
 $app->get('/hello/{name}', function ($name) use ($app) {
-	return ('Hello ' . $app->escape($name)); 
+	return new Response('Hello ' . $app->escape($name)); 
 });
 
 
