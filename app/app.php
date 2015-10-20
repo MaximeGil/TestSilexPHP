@@ -10,7 +10,7 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 });
 
 $app->get('/hello', function () {
-	return ('Hello World');
+	return ('Hello, you');
 });
 
  return $app; 
