@@ -1,18 +1,24 @@
 <?php
+$app['debug']=true;
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array( 'twig.path' => __DIR__.'/../views',));
 
 
-$app->get('/', function() {
-	return ('Hello World');
+$app->get('/', function() use ($app)  {
+	return $app['twig']->render('hello.twig.html', array('name' => 'World',));
 });
+
+$app->get('/hello/', function() use ($app) {
+        return $app['twig']->render('hello.twig.html', array('name' => 'You', ));
+});
+
 
 $app->get('/hello/{name}', function ($name) use ($app) {
-	return ('Hello ' . $app->escape($name)); 
+	return $app['twig']->render('hello.twig.html', array('name' => $name,));
 });
 
-$app->get('/hello', function () {
-	return ('Hello, you');
-});
 
- return $app; 
+
+return $app; 
 
 ?>
