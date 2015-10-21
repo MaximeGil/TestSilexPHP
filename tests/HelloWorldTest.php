@@ -30,4 +30,14 @@ class HelloWorldTest extends WebTestCase
 		$this->assertCount(1, $crawler->filter('h1:contains("Hello toto")'));
 
 	}
+
+	
+	public function testOnlyOneH1()
+	{
+	$client = $this->createClient(); 
+	$crawler = $client->request('GET', '/');
+	$this->assertCount(1, $crawler->filter('h1')); 	
+
+	}
+
 }
