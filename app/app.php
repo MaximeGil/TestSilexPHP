@@ -21,7 +21,7 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 });
 
 
-$app->get('/api/hello', function use ($app) {
+$app->get('/api/hello', function () use ($app) {
 	return json_encode(array('first' => 'Hello', 'second' => 'World)); 
 });
 
