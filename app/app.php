@@ -26,4 +26,4 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 
 return $app; 
 
-?>
+
