@@ -20,4 +20,9 @@ $app->get('/hello/{name}', function ($name) use ($app) {
     return $app['twig']->render('hello.twig.html', array('name' => $name));
 });
 
+
+$app->get('/api/hello', function use ($app) {
+	return json_encode(array('first' => 'Hello', 'second' => 'World); 
+});
+
 return $app;
