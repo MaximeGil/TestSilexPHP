@@ -25,18 +25,26 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 });
 
 $app->get('/api/hello', function (Request $request) use ($app) {
-    $negotiator = $app['negotiator'];
+
+    $negotiator = $app['format.negotiator'];
     $acceptHeader = $request->headers->get('Accept');
     $bestFormat = $negotiator->getBestFormat($acceptHeader, array('json', 'html'));
 
-    if ($bestFormat == 'json') {
-        return json_encode(array('first' => 'Hello', 'second' => 'You'));
+    switch ($bestFormat) {
+    case 'json':
+    return json_encode(array('first' => 'Hello', 'second' => 'World'));
+    break;
+
+    case 'html':
+    return $app['twig']->render('hello.twig.html', array('name' => 'World'));
+    break;
+
     }
 
 });
 
 $app->get('/api/hello/', function () use ($app) {
-return json_encode(array('first' => 'Hello', 'second' => 'You'));
+    return json_encode(array('first' => 'Hello', 'second' => 'You'));
 });
 
 $app->get('/api/hello/{name}', function ($name) use ($app) {
