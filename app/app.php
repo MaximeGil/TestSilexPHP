@@ -2,7 +2,11 @@
 
 require_once __DIR__.'/bootstrap.php';
 
+use KPhoen\Provider\NegotiationServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
+
 $app = new Silex\Application();
+$app->register(new NegotiationServiceProvider());
 
 $app['debug'] = true;
 
@@ -20,8 +24,15 @@ $app->get('/hello/{name}', function ($name) use ($app) {
     return $app['twig']->render('hello.twig.html', array('name' => $name));
 });
 
-$app->get('/api/hello', function () use ($app) {
-    return json_encode(array('first' => 'Hello', 'second' => 'World'));
+$app->get('/api/hello', function (Request $request) use ($app) {
+    $negotiator = $app['negotiator'];
+    $acceptHeader = $request->headers->get('Accept');
+    $bestFormat = $negotiator->getBestFormat($acceptHeader, array('json', 'html'));
+
+    if ($bestFormat == 'json') {
+        return json_encode(array('first' => 'Hello', 'second' => 'You'));
+    }
+
 });
 
 $app->get('/api/hello/', function () use ($app) {
