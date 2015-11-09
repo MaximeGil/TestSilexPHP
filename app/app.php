@@ -47,7 +47,7 @@ $app->get('/api/hello', function (Request $request) use ($app) {
 
 $app->get('/api/hello/', function (Request $request) use ($app) {
 
-	$app = new Negotiation($app);
+	$app = new Negotiation($app, null, null, null, ['language_priorities' => ['fr'], 'format_priorities' => ['html', 'json'], ]);
 	$app->handle($request);
 	$format = $request->attributes->get('_format'); 
 	
@@ -64,3 +64,4 @@ $app->get('/api/hello/{name}', function ($name) use ($app) {
 });
 
 return $app;
+
