@@ -54,6 +54,7 @@ $app->get('/api/hello/', function (Request $request) use ($app) {
 	switch ($format) {
 	case 'html':
 	return $app['twig']->render('hello.twig.html', array('name' => 'World'));
+	break; 
 	}
 		
 	
