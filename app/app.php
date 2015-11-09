@@ -31,6 +31,9 @@ $app = new Negotiation($app);
 $app->handle($request);
 $format = $request->attributes->get('_format');
 
+var_dump($format);
+die(); 
+
 switch($format) {
 case 'html':
 return $app['twig']->render('hello.twig.html', array('name' => 'World'));
