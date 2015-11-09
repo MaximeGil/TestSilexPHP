@@ -31,7 +31,7 @@ $app = new Negotiation($app);
 $app->handle($request);
 $format = $request->attributes->get('_format');
 
-switch ($format) {
+switch($format) {
 case 'html':
 return $app['twig']->render('hello.twig.html', array('name' => 'World'));
 break;
@@ -44,12 +44,41 @@ break;
 
 });
 
-$app->get('/api/hello/', function () use ($app) {
-    return json_encode(array('first' => 'Hello', 'second' => 'You'));
+$app->get('/api/hello/', function (Request $request) use ($app) {
+ 
+$app = new Negotiation($app);
+$app->handle($request);
+$format = $request->attributes->get('_format');
+
+switch ($format){
+case 'html':
+return $app['twig']->render('hello.twig.html', array('name' => 'World'));
+break;
+
+case 'json':
+return json_encode(array('first' => 'Hello', 'second' => 'You'));
+break;
+}
+
 });
 
-$app->get('/api/hello/{name}', function ($name) use ($app) {
-    return json_encode(array('first' => 'Hello', 'second' => $name));
+$app->get('/api/hello/{name}', function (Request $request, $name) use ($app) {
+    
+$app = new Negotiation($app);
+$app->handle($request);
+$format = $request->attributes->get('_format');
+
+switch ($format) {
+case 'html' :
+return $app['twig']->render('hello.twig.html', array('name' => $name));
+break;
+
+case 'json':
+return json_encode(array('first' => 'Hello', 'second' => $name));
+break;
+
+}
+
 });
 
 return $app;
