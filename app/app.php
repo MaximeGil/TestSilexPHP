@@ -50,7 +50,7 @@ $app = new Negotiation($app);
 $app->handle($request);
 $format = $request->attributes->get('_format');
 
-switch ($format){
+switch($format){
 case 'html':
 return $app['twig']->render('hello.twig.html', array('name' => 'World'));
 break;
@@ -68,7 +68,7 @@ $app = new Negotiation($app);
 $app->handle($request);
 $format = $request->attributes->get('_format');
 
-switch ($format) {
+switch($format) {
 case 'html' :
 return $app['twig']->render('hello.twig.html', array('name' => $name));
 break;
