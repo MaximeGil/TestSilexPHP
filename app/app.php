@@ -47,11 +47,7 @@ $app->get('/api/hello', function (Request $request) use ($app) {
 
 $app->get('/api/hello/', function (Request $request) use ($app) {
 
-	$app = new Negotiation($app, null, null, null, ['language_priorities' => ['fr'], 'format_priorities' => ['html', 'json'], ]);
-	$app->handle($request);
-	$format = $request->attributes->get('_format'); 
-	
-	switch ($format) {
+	switch ($request->attributes->get('_format')) {
 	case 'html':
 	return $app['twig']->render('hello.twig.html', array('name' => 'World'));
 	break; 
@@ -64,5 +60,5 @@ $app->get('/api/hello/{name}', function ($name) use ($app) {
     return json_encode(array('first' => 'Hello', 'second' => $name));
 });
 
-return $app = new Negotiation($app);
+return new Negotiation($app);
 
