@@ -49,10 +49,10 @@ $app->get('/api/hello/', function (Request $request) use ($app) {
 	$app = new Negotiation($app);
 	$app->handle($request);
 	$format = $request->attributes->get('_format'); 
-
-	var_dump($format); 
-	die(); 
-
+	
+	var_dump($format);
+	die();	
+	
 });
 
 $app->get('/api/hello/{name}', function ($name) use ($app) {
