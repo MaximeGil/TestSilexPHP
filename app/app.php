@@ -5,6 +5,7 @@ require_once __DIR__.'/bootstrap.php';
 use KPhoen\Provider\NegotiationServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Negotiation\Stack\Negotiation;
+use Symfony\Component\HttpKernel\HttpKernelInterface; 
 
 $app = new Silex\Application();
 $app->register(new NegotiationServiceProvider());
