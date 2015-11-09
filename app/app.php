@@ -62,7 +62,7 @@ break;
 
 });
 
-$app->get('/api/hello/{name}', function (Request $request, $name) use ($app) {
+$app->get('/api/hello/{name}', function ($name, Request $request) use ($app) {
     
 $app = new Negotiation($app);
 $app->handle($request);
