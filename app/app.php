@@ -44,7 +44,7 @@ break;
 
 });
 
-$app->get('/api/hello/', function (Request $request) use ($app) {
+$app->get('/api/hello/', function () use ($app) {
  
 return json_encode(array('first' => 'Hello', 'second' => 'You'));
 });
