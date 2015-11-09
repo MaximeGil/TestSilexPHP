@@ -35,11 +35,11 @@ $app->get('/api/hello', function (Request $request) use ($app) {
     switch ($bestFormat) {
     case 'json':
     return json_encode(array('first' => 'Hello', 'second' => 'World'));
-    break;
+   
 
     case 'html':
     return $app['twig']->render('hello.twig.html', array('name' => 'World'));
-    break;
+   
 
     }
 
@@ -50,9 +50,7 @@ $app->get('/api/hello/', function (Request $request) use ($app) {
 	switch ($request->attributes->get('_format')) {
 	case 'html':
 	return $app['twig']->render('hello.twig.html', array('name' => 'World'));
-	break; 
-	}
-		
+	}		
 	
 });
 
