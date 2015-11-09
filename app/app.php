@@ -64,5 +64,5 @@ $app->get('/api/hello/{name}', function ($name) use ($app) {
     return json_encode(array('first' => 'Hello', 'second' => $name));
 });
 
-return $app;
+return $app = new Negotiation($app);
 
