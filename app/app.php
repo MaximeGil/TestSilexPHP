@@ -27,46 +27,15 @@ $app->get('/hello/{name}', function ($name) use ($app) {
     return $app['twig']->render('hello.twig.html', array('name' => $name));
 });
 
-$app->get('/api/hello', function (Request $request) use ($app) {
+$app
+    ->get('/api/hello', 'TestSilexPhp\Controller\ApiController::getHelloWorld');
 
-        $format = $request->attributes->get('_format');
 
-        switch ($format) {
-        case 'html':
-        return new Response('<h1>Hello World</h1>');
+$app
+    ->get('/api/hello/', 'TestSilexPhp\Controller\ApiController::getHelloYou');
 
-        case 'json':
-        return new JsonResponse(array('first' => 'Hello', 'second' => 'World'));
-        }
 
-});
-
-$app->get('/api/hello/', function (Request $request) use ($app) {
-
-    $format = $request->attributes->get('_format');
-
-    switch ($format) {
-    case 'html':
-    return new Response('<h1>Hello You</h1>');
-
-    case 'json':
-    return new JsonResponse(array('first' => 'Hello', 'second' => 'You'));
-    }
-
-});
-
-$app->get('/api/hello/{name}', function ($name, Request $request) use ($app) {
-
-    $format = $request->attributes->get('_format');
-
-        switch ($format) {
-        case 'html':
-        return new Response('<h1>Hello '.$name.'</h1>');
-
-        case 'json':
-        return new JsonResponse(array('first' => 'Hello', 'second' => $name));
-        }
-
-});
+$app
+    ->get('/api/hello/{name}', 'TestSilexPhp\Controller\ApiController::getHelloWordName');
 
 return $app = new Negotiation($app, null, null, null,  ['format_priorities' => ['html', 'json']]);
