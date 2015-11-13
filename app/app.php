@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use KPhoen\Provider\NegotiationServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,29 +13,28 @@ $app->register(new NegotiationServiceProvider());
 
 $app['debug'] = true;
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
-
-$app->get('/', function () use ($app) {
-    return $app['twig']->render('hello.twig.html', array('name' => 'World'));
-});
-
-$app->get('/hello/', function () use ($app) {
-    return $app['twig']->render('hello.twig.html', array('name' => 'You'));
-});
-
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return $app['twig']->render('hello.twig.html', array('name' => $name));
-});
+$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__ . '/../views'));
 
 $app
-    ->get('/api/hello', 'TestSilexPhp\Controller\ApiController::getHelloWorld');
+        ->get('/', 'TestSilexPhp\Controller\HelloController::getHelloWorld');
+
+$app
+        ->get('/hello/', 'TestSilexPhp\Controller\HelloController::getHelloYou');
+
+$app
+        ->get('/hello/{name}', 'TestSilexPhp\Controller\HelloController::getHelloName');
+
+$app
+        ->get('/api/hello', 'TestSilexPhp\Controller\ApiController::getHelloWorld');
 
 
 $app
-    ->get('/api/hello/', 'TestSilexPhp\Controller\ApiController::getHelloYou');
+        ->get('/api/hello/', 'TestSilexPhp\Controller\ApiController::getHelloYou');
 
 
 $app
-    ->get('/api/hello/{name}', 'TestSilexPhp\Controller\ApiController::getHelloWordName');
+        ->get('/api/hello/{name}', 'TestSilexPhp\Controller\ApiController::getHelloWordName');
 
-return $app = new Negotiation($app, null, null, null,  ['format_priorities' => ['html', 'json']]);
+
+
+return $app = new Negotiation($app, null, null, null, ['format_priorities' => ['html', 'json']]);
